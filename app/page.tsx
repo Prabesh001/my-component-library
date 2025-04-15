@@ -15,64 +15,76 @@ export default function Home() {
   const [key, setKey] = useLocalStorage("key", 1);
 
   return (
-    <div>
-      <p>capitalize()</p>
-      <p>{cap}</p>
-      <hr />
+    <div className="p-4 flex flex-col gap-8">
+      <div>
+        <strong>capitalize()</strong>
+        <p>{cap}</p>
+        <hr />
+      </div>
 
-      <p>capitalizeSentence()</p>
-      <p>{capsen}</p>
-      <hr />
+      <div>
+        <strong>capitalizeSentence()</strong>
+        <p>{capsen}</p>
+        <hr />
+      </div>
 
-      <p>useLocalStorage() hook</p>
-      <p>{key}</p>
-      <button
-        onClick={() => {
-          setKey(key + 2);
-          setShow(!show);
-        }}
-      >
-        click
-      </button>
+      <div>
+        <strong>useLocalStorage() hook</strong>
+        <p>{key}</p>
+        <button
+          onClick={() => {
+            setKey(key + 2);
+            setShow(!show);
+          }}
+        >
+          click
+        </button>
 
-      <hr />
+        <hr />
+      </div>
 
-      <p>Avatar for your profile pic</p>
-      <Avatar src={""} alt="Image" size={35} />
+      <div>
+        <strong>Avatar for your profile pic</strong>
+        <Avatar src={""} alt="Image" size={35} />
+        <small>|| Must also download fallback image</small>
+        <hr />
+      </div>
 
-      <hr />
+      <div>
+        <strong>Click the click button of useLocalStorage for Popup</strong>
+        <Popup
+          isOpen={show}
+          onClose={() => setShow(false)}
+          popupClassName="w-[90vw] sm:w-[60vw] bg-gray-400"
+          crossClassName="text-white"
+          content={
+            <div className="text-black">
+              <p>Hello</p>
+            </div>
+          }
+        />
 
-      <p>Click the click button of useLocalStorage for Popup</p>
-      <Popup
-        isOpen={show}
-        onClose={() => setShow(false)}
-        popupClassName="w-[90vw] sm:w-[60vw] bg-gray-400"
-        crossClassName="text-white"
-        content={
-          <div className="text-black">
-            <p>Hello</p>
-          </div>
-        }
-      />
+        <hr />
+      </div>
 
-      <hr />
-
-      <p>Popover</p>
-      <Popover
-        parentContent={
-          <>
-            <button>Hello</button>
-          </>
-        }
-        childrenContent={
-          <>
-            <button>Hello</button>
-          </>
-        }
-        popoverParentClassName={"bg-green-800"}
-        popoverChildClassName={"top-0 left-0"}
-      />
-      <hr />
+      <div>
+        <strong>Popover</strong>
+        <Popover
+          parentContent={
+            <>
+              <button>Hello</button>
+            </>
+          }
+          childrenContent={
+            <>
+              <button>Hello</button>
+            </>
+          }
+          popoverParentClassName={"bg-green-800"}
+          popoverChildClassName={"top-0 left-0"}
+        />
+        <hr />
+      </div>
     </div>
   );
 }
