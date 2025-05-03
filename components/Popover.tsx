@@ -8,14 +8,15 @@ interface PopoverProps {
   popoverParentClassName?: string;
 }
 
-const Popover = ({
-  popoverChildClassName,
+const Popover: React.FC<PopoverProps> = ({
   popoverParentClassName,
+  popoverChildClassName,
   parentContent,
   childrenContent,
-}: PopoverProps) => {
+}) => {
   const [showPopover, setShowPopover] = useState(false);
-  const popRef: React.RefObject<any> = useRef(null);
+  const popRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (popRef.current && !popRef.current.contains(event.target as Node)) {
@@ -23,29 +24,23 @@ const Popover = ({
       }
     };
 
-    if (showPopover) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showPopover]);
+  }, []);
+
   return (
-    <div ref={popRef} className="p-2 inline-flex relative">
+    <div ref={popRef} className="relative">
       <div
-        className={`${popoverParentClassName} bg-green-500`}
-        onClick={() => setShowPopover(!showPopover)}
+        className={`${popoverParentClassName} cursor-pointer`}
+        onClick={() => setShowPopover((prev) => !prev)}
       >
         {parentContent}
       </div>
 
       {showPopover && (
-        <div
-          className={` bg-blue-600 absolute top-8 left-2 ${popoverChildClassName}`}
-        >
+        <div className={`absolute z-30 ${popoverChildClassName}`}>
           {childrenContent}
         </div>
       )}

@@ -26,7 +26,7 @@ export const capitalizeSentence = (str: string) => {
 
 export const inBetween = (a: number, b: number) => {
   if (typeof window === "undefined") {
-    return  a;
+    return a;
   }
 
   if (typeof a !== "number" || typeof b !== "number") {

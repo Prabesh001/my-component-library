@@ -2,15 +2,17 @@
 import Avatar from "@/components/Avatar";
 import Popover from "@/components/Popover";
 import Popup from "@/components/Popup";
-import { capitalize, capitalizeSentence } from "@/functions";
+import { capitalize, capitalizeSentence, inBetween } from "@/functions";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { useState } from "react";
 
 export default function Home() {
   const [show, setShow] = useState(false);
-  const str = "hello world. how you doing";
+  const str = "hello world. how are you. how you doing";
   const cap = capitalize(str);
   const capsen = capitalizeSentence(str);
+
+  const random = inBetween(0,100)
 
   const [key, setKey] = useLocalStorage("key", 1);
 
@@ -25,6 +27,12 @@ export default function Home() {
       <div>
         <strong>capitalizeSentence()</strong>
         <p>{capsen}</p>
+        <hr />
+      </div>
+
+      <div>
+        <strong>inBetween()</strong>
+        <p>{random}</p>
         <hr />
       </div>
 
